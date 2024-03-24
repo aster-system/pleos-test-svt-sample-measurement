@@ -1,0 +1,4 @@
+- Problème de parent dans graphic.h "scale_for_rendering"
+	Changer HUD_Object* current_parent = parent(); par HUD_Object* current_parent = this;
+
+- Cursor disabled par défaut dans game.h "Game()"
