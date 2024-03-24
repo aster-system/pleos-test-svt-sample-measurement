@@ -34,13 +34,13 @@ static HUD_Button* navigation_simulation_button = 0;
 // Variable contenant le bouton de navigation permettant d'atteindre l'accueil
 static HUD_Button* navigation_welcome_button = 0;
 
-// Variable de la partie accueil
-// Variable contenant la page de la partie accueil
-static HUD_Object* welcome_page = 0;
-// Variable contenant le texte de la page de la partie accueil
-static HUD_Text* welcome_page_text = 0;
-// Variable contenant le titre de la page de la partie accueil
-static HUD_Text* welcome_page_title = 0;
+// Variable de la partie d'explication
+// Variable contenant la page de la partie explication
+static HUD_Object* explaination_page = 0;
+// Variable contenant le texte de la page de la partie explication
+static HUD_Text* explaination_page_text = 0;
+// Variable contenant le titre de la page de la partie explication
+static HUD_Text* explaination_page_title = 0;
 
 // Variable de la partie d'informations
 // Variable contenant la page de la partie information
@@ -49,6 +49,14 @@ static HUD_Object* information_page = 0;
 static HUD_Text* information_page_text = 0;
 // Variable contenant le titre de la page de la partie information
 static HUD_Text* information_page_title = 0;
+
+// Variable de la partie accueil
+// Variable contenant la page de la partie accueil
+static HUD_Object* welcome_page = 0;
+// Variable contenant le texte de la page de la partie accueil
+static HUD_Text* welcome_page_text = 0;
+// Variable contenant le titre de la page de la partie accueil
+static HUD_Text* welcome_page_title = 0;
 
 // Fonction "create_window", créant et définissant chaque pages du programme
 void create_window() {
@@ -63,6 +71,34 @@ void create_window() {
     main_hud->set_sized_according_to_ratio(false);
     main_hud->set_use_parent_rescaling(false);
 
+    // Créer "explaination_page"
+    explaination_page = main_hud->new_hud_object("explaination_page", main_hud, 1, 1, glm::vec4(192, 192, 192, 255), "hud_default");
+    explaination_page->set_height(1.0, false);
+    explaination_page->set_position(glm::vec3(0.25, 0, 0));
+    explaination_page->set_width((750.0/1000.0) * (10.0/6.0), false);
+
+    // Créer "explaination_page_text"
+    std::string explaination_1 = scls::to_utf_8("L'idée de la méthode est d'utiliser un ratio (une fraction) pour calculer le nombre d'individus.\nEn effet, si on sait qu'un certain nombre d'indivu marqués représente un certain pourcentage\nd'individu marqués,on peut estimer le nombre total d'individus grâce aux équations suivantes :\n% individus marqués + % individus non marqués = 100%\nQu'on peut changer en :\n100% - % individus marqués = % individus non marqués\nOn peut donc calculer le pourcentage d'individus marqués et non marqués.\nOn peut ensuite calculer le nombre d'invidus non marqués grâce aux lois des statistiques :\n  % individus marqués             nombre individus marqués  \n----------------------------     =     ---------------------------------\n% individus non marqués         nombre individus non marqués\nQu'on peut modifier facilement comme ça :\n                                                        % individus non marqués\nnombre individus non marqués = nombre individus marqués X ----------------------------------\n                                                        % individus marqués\n");
+    explaination_1 += scls::to_utf_8("Nous pouvons calculer le nombre d'indivus non marqués, et aussi le nombre d'individus total.");
+    explaination_page_text = main_hud->new_hud_object<HUD_Text>("explaination_page_text", explaination_page, 1, 1, glm::vec4(0, 0, 0, 255), "hud_default");
+    explaination_page_text->set_background_color(glm::vec4(0, 0, 0, 0));
+    explaination_page_text->set_font_color(glm::vec4(0, 0, 0, 255));
+    explaination_page_text->set_font_size(30);
+    explaination_page_text->set_text(explaination_1);
+    explaination_page_text->set_position(glm::vec3(0, -0.35, 0));
+    explaination_page_text->set_width(0.59);
+    explaination_page_text->set_height(explaination_page_text->scale()[1] * 2.5, false);
+
+    // Créer "explaination_page_title"
+    explaination_page_title= main_hud->new_hud_object<HUD_Text>("explaination_page_title", explaination_page, 1, 1, glm::vec4(0, 0, 0, 255), "hud_default");
+    explaination_page_title->set_background_color(glm::vec4(0, 0, 0, 0));
+    explaination_page_title->set_font_color(glm::vec4(0, 0, 0, 255));
+    explaination_page_title->set_font_size(300);
+    explaination_page_title->set_text("Explications");
+    explaination_page_title->set_position(glm::vec3(0, 0.65, 0));
+    explaination_page_title->set_width(0.35);
+    explaination_page_title->set_height(explaination_page_title->scale()[1] * 2.5, false);
+
     // Créer "information_page"
     information_page = main_hud->new_hud_object("information_page", main_hud, 1, 1, glm::vec4(192, 192, 192, 255), "hud_default");
     information_page->set_height(1.0, false);
@@ -74,7 +110,7 @@ void create_window() {
     information_page_text->set_background_color(glm::vec4(0, 0, 0, 0));
     information_page_text->set_font_color(glm::vec4(0, 0, 0, 255));
     information_page_text->set_font_size(30);
-    information_page_text->set_text(scls::to_utf_8(license + "\n|\n|\nCe logiciel est réalisé avec un langage de programmation appelé C++, plus complexe mais\nplus rapide et logique que Python. Il utilise l'API graphique \"SCLS Graphic Benoit\"\n(développé par moi même), utilisant les APIs GLFW, GlaD, GLM et OpenGL 3.3. Il utilise aussi\nles bibliothèques C++ \"SCLS Foundation Leonhard\" (développé par moi même),\nutilisant les librairies FreeType et ZLib.\nAllez sur mon site web https://aster-system.github.io/aster-system/ pour plus d'informations.\n|\n|\nCe logiciel est un prototype d'un futur ensemble de logiciel appelé PLEOS pour Pack de\nLogiciel Éducatifs Open Source. Même si ce projet n'est qu'au stade d'idée, il permettrai\nde grandement faciliter l'enseignement par les professeurs et l'apprentissage par les élèves."));
+    information_page_text->set_text(scls::to_utf_8(license + "\n|\n|\nCe logiciel est réalisé avec un langage de programmation appelé C++, plus complexe mais\nplus rapide et logique que Python. Il utilise l'API graphique \"SCLS Graphic Benoit\"\n(développé par moi même), utilisant les APIs GLFW, GlaD, GLM et OpenGL 3.3. Il utilise aussi\nles bibliothèques C++ \"SCLS Foundation Leonhard\" (développé par moi même),\nutilisant les librairies FreeType et ZLib.\nAllez sur mon site web https://aster-system.github.io/aster-system/ pour plus d'informations.\n|\n|\nCe logiciel est un prototype d'un futur ensemble de logiciel appelé PLEOS pour Pack de\nLogiciel Éducatifs Open Source. Même si ce projet n'est qu'au stade d'idée, il permettrai\nde grandement faciliter l'enseignement par les professeurs et l'apprentissage par les élèves.\nPour plus d'infos, allez sur mon site web https://aster-system.github.io/aster-system/projects/pleos.html."));
     information_page_text->set_position(glm::vec3(0, -0.35, 0));
     information_page_text->set_width(0.59);
     information_page_text->set_height(information_page_text->scale()[1] * 2.5, false);
@@ -176,9 +212,21 @@ void create_window() {
 // Fonction "unset_all_page", cachant toutes les pages du programme.
 void unset_all_page() {
     // Cacher les pages
+    explaination_page->set_visible(false);
+    information_page->set_visible(false);
     welcome_page->set_visible(false);
 
     navigation_container->set_visible(true);
+}
+
+// Fonction "set_explaination_page", permettant d'afficher la page d'explication du programme.
+// La variable "part" permet de savoir qu'elle partie de l'explication afficher.
+void set_explaination_page(unsigned char part = false) {
+    // Cache toutes les pages potentiellements affichées et montre la bonne
+    unset_all_page();
+    explaination_page->set_visible(true);
+
+
 }
 
 // Fonction "set_information_page", permettant d'afficher la page d'information du programme.
@@ -215,7 +263,7 @@ int main(int argc, char* argv[])
 
         // Gérer les évènements de navigation
         if(navigation_explaination_button->is_clicked()) {
-
+            set_explaination_page();
         }
         else if(navigation_information_button->is_clicked()) {
             set_information_page();
