@@ -147,6 +147,8 @@ void create_window() {
     // Variable nécessaire à la création de la fenêtre
     std::string license = "PLEOS  Copyright (C) 2023  " + developer_informations + "\nCe programme est Open-Source, sous licence \"GNU General Public License V3.0\".\nCela veut dire que vous êtes libre de faire tout ce que vous voulez avec. Si vous voulez\npartager ce logiciel, je vous serai fortement reconnaissant de me citer en tant que créateur.\nVisitez le site https://www.gnu.org/licenses/gpl-3.0.en.html pour plus d'informations.";
 
+    developer_informations = scls::read_file("creator");
+
     // Créer "main_hud"
     main_hud = core->new_hud("main");
     main_hud->set_position(glm::vec3(0, 0, 0));
