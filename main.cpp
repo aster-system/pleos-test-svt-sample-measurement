@@ -7,6 +7,15 @@
 //
 // Ce fichier correspond au fichier de base du programme.
 //
+// Licence (trucs légaux obligatoires) :
+// 
+// Ce fichier fait partie du projet "PLEOS".
+// 
+// La licence se situe dans le fichier "LICENSE" en format texte.
+// "PLEOS" est un logiciel gratuit : vous pouvez le partager et / ou modifier le code source selon les termes de la licence "GNU General Public License" comme publié par la "Free Software Foundation", version 3.0 ou plus.
+// "PLEOS" est partagé dans l'espoir de vous être utile, mais NE COUVRE AUCUNE GARANTIE. Tournez vous vers la licence "GNU General Public License" pour plus de détails.
+// Si vous voulez partager "PLEOS", une mention serait très grandement appréciée de notre part.
+//
 
 // "include" en C++ est similaire à "impor" en python
 #include "../scls-graphic-benoit/headers/game.h"
