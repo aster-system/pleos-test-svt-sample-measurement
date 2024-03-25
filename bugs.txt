@@ -2,3 +2,9 @@
 	Changer HUD_Object* current_parent = parent(); par HUD_Object* current_parent = this;
 
 - Cursor disabled par défaut dans game.h "Game()"
+
+- Problème de taille dans chaque objet d'HUD, obligé de manuellement resize de 2.5 à chaque objets
+
+- Problème de détection des objets cliqué si superposition dans le HUD dans game.cpp, et object invisible affiché aussi
+
+- Bug dans replace, à la fin d'une chaîne
